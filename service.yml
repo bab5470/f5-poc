@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    cis.f5.com/ipamLabel: Common
+  labels:
+    app: svc-lb1
+  name: svc-lb1
+  namespace: default
+spec:
+  ports:
+    - name: svc-lb1-80
+      port: 80
+      protocol: TCP
+      targetPort: 9200
+  selector:
+    app: elasticsearch-master
+  type: LoadBalancer
+status:
+  loadBalancer:
+    ingress:
+    - ip: 10.40.14.217
